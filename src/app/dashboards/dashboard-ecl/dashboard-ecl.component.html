@@ -1,0 +1,140 @@
+<!-- ============================================================== -->
+<!-- Charts ECL Initialiser -->
+<!-- ============================================================== -->
+<div fxLayout="row" fxLayout.xs="column">
+    <div fxFlex="100">
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header class="bg-info" [collapsedHeight]="'45px'" [expandedHeight]="'45px'">
+                <mat-panel-title class="text-white">Model Assignment</mat-panel-title>
+            </mat-expansion-panel-header>        
+            <div fxLayout="row" fxLayoutWrap="wrap" class="m-t-30">
+                <div fxFlex.gt-md="30.00%" fxFlex.gt-sm="40.00%" fxFlex.gt-xs="100%" fxFlex="100">
+                    <mat-card-subtitle class="text-center">Distribution model (overall)</mat-card-subtitle>
+                    <canvas baseChart class="m-auto" width="230" height="230" [data]="modelDoughnutChartData" [labels]="modelDoughnutChartLabels" [legend]="modelDoughnutChartLegend" [options]="modelDoughnutChartOptions" [chartType]="modelDoughnutChartType" [colors]="modelDoughnutChartChartColors"></canvas>
+                    <ul class="list-inline text-center">
+                        <li *ngFor="let lab of modelLegendLabels"><h6 [ngClass]="'text-muted ' + lab.class + ' m-0'"><i class="fa fa-circle font-10 m-r-10"></i>{{lab.label}}</h6> </li>
+                    </ul>
+                </div>
+                <div fxFlex.gt-md="50.00%" fxFlex.gt-sm="60.00%" fxFlex.gt-xs="100%" fxFlex="100">
+                    <mat-card-subtitle class="text-center">Trend of newly initialised vs. closed</mat-card-subtitle>
+                    <canvas baseChart class="m-auto" width="230" height="100" [datasets]="modelBarChartData" [labels]="modelBarChartLabels" [options]="modelBarChartOptions" [legend]="modelBarChartLegend" [chartType]="modelBarChartType" (chartHover)="chartHovered($event)" [colors]="modelBarChartColors" (chartClick)="chartClicked($event)"></canvas>
+                    <ul class="list-inline text-center">
+                        <li *ngFor="let lab of modelLegendLabels"><h6 [ngClass]="'text-muted ' + lab.class + ' m-0'"><i class="fa fa-circle font-10 m-r-10"></i>{{lab.label}}</h6> </li>
+                    </ul>
+                </div>
+                <div fxFlex.gt-md="20%" fxFlex.gt-sm="100%" fxFlex.gt-xs="100%" fxFlex="100">
+                    <mat-card-subtitle class="text-center">Status of the service</mat-card-subtitle>
+                    <div class="text-center">
+                        <button mat-fab color="warn" class="quality-button">Bad</button>
+                    </div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <p></p>
+            <a routerLink="/ecl-model/model-details"><button mat-raised-button color="accent">Details</button></a>
+        </mat-expansion-panel>
+    </div>   
+</div>
+<!-- <p></p> -->
+
+<!-- ============================================================== -->
+<!-- Charts ECL Stage Allocation -->
+<!-- ============================================================== -->
+<div fxLayout="row" fxLayout.xs="column">
+    <div fxFlex="100">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header class="bg-info text-white" [collapsedHeight]="'45px'" [expandedHeight]="'45px'">
+                <mat-panel-title class="text-white">Distribution of stage transistions </mat-panel-title>
+            </mat-expansion-panel-header>        
+            <div fxLayout="row" fxLayoutWrap="wrap" class="m-t-30">
+                <div fxFlex.gt-md="50.00%" fxFlex.gt-sm="60.00%" fxFlex.gt-xs="100%" fxFlex="100">
+                    <mat-card>
+                        <mat-card-content>
+                            <mat-card-subtitle class="text-center">Trend of Distribution of ECL Stages on Positions</mat-card-subtitle>
+                            <canvas baseChart class="m-auto" width="230" height="100" [datasets]="stageTrendBarChartData" [labels]="stageTrendBarChartLabels" [options]="stageTrendBarChartOptions" [legend]="stageTrendBarChartLegend" [chartType]="stageTrendBarChartType" (chartHover)="chartHovered($event)" [colors]="stageTrendBarChartColors" (chartClick)="chartClicked($event)"></canvas>
+                            <ul class="list-inline text-center">
+                                <li *ngFor="let lab of stageLegendLabels"><h6 [ngClass]="'text-muted ' + lab.class + ' m-0'"><i class="fa fa-circle font-10 m-r-10"></i>{{lab.label}}</h6> </li>
+                            </ul>
+                         </mat-card-content>
+                    </mat-card>
+                </div>
+                <div fxFlex.gt-md="30.00%" fxFlex.gt-sm="40.00%" fxFlex.gt-xs="100%" fxFlex="100">
+                    <mat-card>
+                        <mat-card-content>
+                            <mat-card-subtitle class="text-center">Distribution of ECL Stages on Positions</mat-card-subtitle>
+<!--                             <canvas baseChart class="m-auto" width="230" height="230" [data]="stageDoughnutChartData" [labels]="stageDoughnutChartLabels" [legend]="stageDoughnutChartLegend" [options]="stageDoughnutChartOptions" [chartType]="stageDoughnutChartType" [colors]="stageDoughnutChartChartColors"></canvas> -->
+                            <ul class="list-inline text-center">
+                                <li *ngFor="let lab of stageLegendLabels"><h6 [ngClass]="'text-muted ' + lab.class + ' m-0'"><i class="fa fa-circle font-10 m-r-10"></i>{{lab.label}}</h6> </li>
+                            </ul>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div fxFlex.gt-md="20%" fxFlex.gt-sm="100%" fxFlex.gt-xs="100%" fxFlex="100">
+                    <mat-card>
+                            <mat-card-content>
+                            <mat-card-subtitle class="text-center">Data Quality</mat-card-subtitle>
+                            <div class="text-center">
+                                <button mat-fab color="warn" class="quality-button">Bad</button>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+            <mat-action-row>
+                <button mat-raised-button color="accent">Details</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+    </div>   
+</div>
+<!-- <p></p> -->
+
+<!-- ============================================================== -->
+<!-- Charts ECL Initialiser -->
+<!-- ============================================================== -->
+<div fxLayout="row" fxLayout.xs="column">
+    <div fxFlex="100">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header class="bg-info text-white" [collapsedHeight]="'45px'" [expandedHeight]="'45px'">
+                <mat-panel-title class="text-white">ECL Calculation</mat-panel-title>
+            </mat-expansion-panel-header>        
+            <mat-card>
+                <mat-card-header class="bg-info text-white">
+                    <mat-card-title>
+                        ECL Model Assignment
+                        <button class="bg-info text-white b-0"><mat-icon>expand_less</mat-icon></button>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div fxLayout="row" fxLayoutWrap="wrap" class="m-t-30">
+                        <div fxFlex.gt-md="30.00%" fxFlex.gt-sm="40.00%" fxFlex.gt-xs="100%" fxFlex="100">
+                            <mat-card-subtitle class="text-center">Distribution of ECL Models on Positions</mat-card-subtitle>
+                            <canvas baseChart class="m-auto" width="230" height="230" [data]="modelDoughnutChartData" [labels]="modelDoughnutChartLabels" [legend]="modelDoughnutChartLegend" [options]="modelDoughnutChartOptions" [chartType]="modelDoughnutChartType" [colors]="modelDoughnutChartChartColors"></canvas>
+                            <ul class="list-inline text-center">
+                                <li *ngFor="let lab of modelLegendLabels"><h6 [ngClass]="'text-muted ' + lab.class + ' m-0'"><i class="fa fa-circle font-10 m-r-10"></i>{{lab.label}}</h6> </li>
+                            </ul>
+                        </div>
+                        <div fxFlex.gt-md="50.00%" fxFlex.gt-sm="60.00%" fxFlex.gt-xs="100%" fxFlex="100">
+                            <mat-card-subtitle class="text-center">History of Distribution of ECL Models on Positions</mat-card-subtitle>
+                            <canvas baseChart class="m-auto" width="230" height="100" [datasets]="modelBarChartData" [labels]="modelBarChartLabels" [options]="modelBarChartOptions" [legend]="modelBarChartLegend" [chartType]="modelBarChartType" (chartHover)="chartHovered($event)" [colors]="modelBarChartColors" (chartClick)="chartClicked($event)"></canvas>
+                            <ul class="list-inline text-center">
+                                <li *ngFor="let lab of modelLegendLabels"><h6 [ngClass]="'text-muted ' + lab.class + ' m-0'"><i class="fa fa-circle font-10 m-r-10"></i>{{lab.label}}</h6> </li>
+                            </ul>
+                        </div>
+                        <div fxFlex.gt-md="20%" fxFlex.gt-sm="100%" fxFlex.gt-xs="100%" fxFlex="100">
+                            <mat-card-subtitle class="text-center">Data Quality</mat-card-subtitle>
+                            <div class="text-center">
+                                <button mat-fab color="warn" class="quality-button">Bad</button>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-card-actions>
+                        <button mat-raised-button color="accent">Details</button>
+                    </mat-card-actions>
+                </mat-card-content>
+            </mat-card>
+        </mat-expansion-panel>
+    </div>   
+</div>
+<p></p>
+
+    
